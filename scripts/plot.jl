@@ -18,6 +18,11 @@ DPI = 300
 TAB_DELIM = '\t'
 EOL = '\n'
 
+EXP3_TITLE = "Experiment 3"
+EXP3_TIME = 30 #s
+EXP5_TITLE = "Experiment 5"
+EXP5_TIME = 10 #s
+
 
 """
 plot_data - Plot data.
@@ -27,15 +32,19 @@ data :: ndarray(4 x N) - A matrix containing data from a piezo voltage sweep.
 
 Returns: nothing
 """
-function plot_data(data_path, save_path, title)
+function plot_data(data_path, save_path, title, time)
     # Grab data.
     metadata = readdlm(data_path, TAB_DELIM, Float64, EOL, header=true)
     data = metadata[1]
     voltages = data[:, 1]
     c_rate = data[:, 3]
-    dc_rate = map(sqrt, c_rate)
+    c_count = c_rate * time
+    dc_count = map(sqrt, c_count)
+    dc_rate = dc_count / time
     d_rate = data[:, 4]
-    dd_rate = map(sqrt, d_rate)
+    d_count = d_rate * time
+    dd_count = map(sqrt, d_count)
+    dd_rate = dd_count / time
     
     # Plot.
     fig = Plots.plot(voltages, c_rate, color="blue", label=nothing)
@@ -55,11 +64,11 @@ end
 main - Plot all the things.
 """
 function main()
-    if false
-        plot_data(EXP3_DATA_PATH, EXP3_SAVE_PATH, "Experiment 3")
+    if true
+        plot_data(EXP3_DATA_PATH, EXP3_SAVE_PATH, EXP3_TITLE, EXP3_TIME)
     end
 
-    if false
-        plot_data(EXP5_DATA_PATH, EXP5_SAVE_PATH, "Experiment 5")
+    if true
+        plot_data(EXP5_DATA_PATH, EXP5_SAVE_PATH, EXP5_TITLE, EXP5_TIME)
     end
 end
