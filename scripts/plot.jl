@@ -18,7 +18,7 @@ DPI = 300
 TAB_DELIM = '\t'
 EOL = '\n'
 
-EXP3_TITLE = "Experiment 3"
+EXP3_TITLE = "Experiment 4"
 EXP3_TIME = 30 #s
 EXP5_TITLE = "Experiment 5"
 EXP5_TIME = 10 #s
@@ -68,7 +68,7 @@ function main()
         plot_data(EXP3_DATA_PATH, EXP3_SAVE_PATH, EXP3_TITLE, EXP3_TIME)
     end
 
-    if true
+    if false
         plot_data(EXP5_DATA_PATH, EXP5_SAVE_PATH, EXP5_TITLE, EXP5_TIME)
     end
 end
